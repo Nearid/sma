@@ -22,7 +22,7 @@ class Body:
         self.reprod = [50, 52]
         self.birthdate = time.time(),
 
-        self.lifespan = 500000.0
+        self.lifespan = 500000000000.0
 
         self.dead = False
         self.sleep = False
@@ -31,16 +31,10 @@ class Body:
 
 
     def move(self):
-        if self.sleep:
-            self.sleepTime += 1
 
         if self.sleep or self.dead:
             self.speed = Vector2(0, 0)
             return
-
-        if self.sleepTime >= 1000:
-            self.tireness[0] = 0
-            self.sleepTime = 0
 
         if self.acc.length() > self.maxAcc:
             self.acc.scale_to_length(self.maxAcc)
@@ -55,24 +49,32 @@ class Body:
         self.edge()
 
     def update(self):
+        if self.sleep:
+            self.sleepTime += 1
+
+        if self.sleepTime >= 50:
+            self.tireness[0] = 0
+            self.sleepTime = 0
+            self.sleep = False
+
         if self.has_passed_1_sec():
             self.tireness[0] += 1
             self.hunger[0] += 1
             self.reprod[0] += 1
+
         if self.tireness[0] >= self.tireness[1]:
             self.sleep = True
-        if self.hunger[0] >= self.hunger[1]:
-            self.dead = True
-        if self.reprod[0] >= self.reprod[1]:
-            pass
+
         if self.is_dead():
             self.sleep = False
             self.dead = True
 
 
     def is_dead(self):
-        return time.time() - self.birthdate[0] >= self.lifespan
+        return time.time() - self.birthdate[0] >= self.lifespan or self.hunger_dead()
 
+    def hunger_dead(self):
+        return self.hunger[0] >= self.hunger[1]
 
 
     def edge(self):
@@ -105,3 +107,6 @@ class Body:
             core.Draw.circle((255, 255, 255), self.pos, 5)
         elif self.sleep:
             core.Draw.circle((0, 0 ,0), self.pos, 5)
+
+    def is_reproductible(self):
+        return self.reprod[0] >= self.reprod[1]

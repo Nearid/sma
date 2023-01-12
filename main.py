@@ -8,6 +8,20 @@ from superpredatoragent import SuperpredatorAgent
 LENGTH = 500
 HEIGHT = 500
 
+def handle():
+    for agent in core.memory("agents"):
+        if agent.body.is_reproductible():
+            agent.body.reprod[0] = 0
+            if isinstance(agent, CarnivoreAgent):
+                core.memory("agents").append(CarnivoreAgent())
+            elif isinstance(agent, SuperpredatorAgent):
+                core.memory("agents").append(SuperpredatorAgent())
+            elif isinstance(agent, HerbivoreAgent):
+                core.memory("agents").append(HerbivoreAgent())
+            elif isinstance(agent, DecomposeurAgent):
+                core.memory("agents").append(DecomposeurAgent())
+
+
 def setup():
     print("Setup START---------")
     core.fps = 30
@@ -57,4 +71,8 @@ def run():
     for agent in core.memory("agents"):
         applyDecision(agent)
 
+    handle()
+
 core.main(setup, run)
+
+

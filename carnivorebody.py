@@ -1,7 +1,11 @@
-import core
 from random import uniform
 from vivarium import vivarium
 from body import Body
+from random import uniform
+
+from body import Body
+from vivarium import vivarium
+
 
 class CarnivoreBody(Body):
     def __init__(self):

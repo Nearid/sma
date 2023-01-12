@@ -10,16 +10,16 @@ vivarium = {
                 "min": 8
             },
             "hunger": {
-                "max": 50,
-                "min": 20
+                "max": 100,
+                "min": 80
             },
             "tireness": {
-                "max": 50,
-                "min": 20
+                "max": 10,
+                "min": 5
             },
             "reprod": {
-                "max": 50,
-                "min": 20
+                "max": 10,
+                "min": 5
             },
         }
     },
@@ -34,12 +34,12 @@ vivarium = {
                 "min": 4
             },
             "hunger": {
-                "max": 40,
-                "min": 30
+                "max": 100,
+                "min": 80
             },
             "tireness": {
-                "max": 40,
-                "min": 30
+                "max": 10,
+                "min": 5
             },
             "reprod": {
                 "max": 100,
@@ -60,12 +60,12 @@ vivarium = {
                 "min": 1
             },
             "hunger": {
-                "max": 50,
-                "min": 30
+                "max": 100,
+                "min": 80
             },
             "tireness": {
-                "max": 50,
-                "min": 30
+                "max": 10,
+                "min": 5
             },
             "reprod": {
                 "max": 100,
@@ -81,16 +81,16 @@ vivarium = {
                 "min": 8
             },
             "maxAcc": {
-                "max": 18,
-                "min": 15
+                "max": 10,
+                "min": 8
             },
             "hunger": {
-                "max": 30,
-                "min": 20
+                "max": 100,
+                "min": 80
             },
             "tireness": {
-                "max": 30,
-                "min": 20
+                "max": 10,
+                "min": 5
             },
             "reprod": {
                 "max": 200,
