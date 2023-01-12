@@ -1,9 +1,9 @@
 couleur :
-SuperPredator : bleu
-Carnivore : rouge
-Herbivore : vert
-Décomposeur : marron
+- SuperPredator : bleu
+- Carnivore : rouge
+- Herbivore : vert
+- Décomposeur : marron
 
 
-dormir : point noir
-mort : point blanc
+- dormir : point noir
+- mort : point blanc
