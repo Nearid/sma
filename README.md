@@ -18,7 +18,7 @@ en fonction de l'environnement.
 Si dans ma perception j'ai :
 
 - des prédateurs et des "amis*" : je suis mon ami
-- dans prédateurs, mais pas d'amis : je fuis mes prédateurs
+- des prédateurs, mais pas d'amis : je fuis mes prédateurs
 - des proies, des amis, mais pas de prédateurs :
     - si j'ai "faim" (càd je suis en mode "chasse" comme expliqué plus haut) → je chasse ma proie la plus proche
     - sinon → je suis mon ami
