@@ -1,0 +1,121 @@
+{
+  "superpredator": {
+    "nb": 3,
+    "params": {
+      "lifespan": {
+        "max": 500,
+        "min": 480
+      },
+      "maxSpeed": {
+        "max": 4.5,
+        "min": 3
+      },
+      "maxAcc": {
+        "max": 4.5,
+        "min": 2
+      },
+      "hunger": {
+        "max": 40,
+        "min": 30
+      },
+      "tireness": {
+        "max": 50,
+        "min": 20
+      },
+      "reprod": {
+        "max": 50,
+        "min": 20
+      }
+    }
+  },
+  "carnivore": {
+    "nb": 5,
+    "params": {
+      "lifespan": {
+        "max": 480,
+        "min": 400
+      },
+      "maxSpeed": {
+        "max": 5,
+        "min": 3
+      },
+      "maxAcc": {
+        "max": 4,
+        "min": 2
+      },
+      "hunger": {
+        "max": 30,
+        "min": 25
+      },
+      "tireness": {
+        "max": 120,
+        "min": 100
+      },
+      "reprod": {
+        "max": 40,
+        "min": 20
+      }
+    }
+  },
+  "decomposeur": {
+    "nb": 5,
+    "params": {
+      "lifespan": {
+        "max": 100,
+        "min": 80
+      },
+      "maxSpeed": {
+        "max": 2,
+        "min": 0.5
+      },
+      "maxAcc": {
+        "max": 2,
+        "min": 1
+      },
+      "hunger": {
+        "max": 30,
+        "min": 10
+      },
+      "tireness": {
+        "max": 50,
+        "min": 40
+      },
+      "reprod": {
+        "max": 35,
+        "min": 10
+      }
+    }
+  },
+  "herbivore": {
+    "nb": 7,
+    "params": {
+      "lifespan": {
+        "max": 300,
+        "min": 200
+      },
+      "maxSpeed": {
+        "max": 4,
+        "min": 2
+      },
+      "maxAcc": {
+        "max": 4,
+        "min": 2
+      },
+      "hunger": {
+        "max": 30,
+        "min": 10
+      },
+      "tireness": {
+        "max": 45,
+        "min": 20
+      },
+      "reprod": {
+        "max": 45,
+        "min": 20
+      }
+    }
+  },
+  "vegetaux": {
+    "nb": 50
+  }
+}

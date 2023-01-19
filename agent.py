@@ -1,8 +1,10 @@
 from random import randint
 from random import uniform
+from corner import Corner
+from pygame import Vector2
 
 import core
-from pygame import Vector2
+
 
 class Agent:
     def __init__(self, body):
@@ -12,39 +14,82 @@ class Agent:
         self.hunting = False
 
     def update(self):
-        self.hunting = self.body.hunger[0] / self.body.hunger[1] > 0.5
+        self.hunting = self.body.hunger[0] / self.body.hunger[1] > 0.5 and not self.body.dead
+        preys, dangers, symbs = self.filtrePerception()
+        if len(dangers) > 0 and len(symbs) > 0:
+            self.run_to(symbs[0].pos)
 
-        preys, dangers = self.filtrePerception()
-        if len(preys) == 0 and len(dangers) == 0:
-            self.body.acc = Vector2(uniform(-1, 1), uniform(-1, 1))
+        elif len(dangers) > 0 and len(symbs) == 0:
+            self.run_from(dangers)
 
-        if len(dangers) > 0:
-            danger = dangers[0]
-            if isinstance(danger, Agent):
-                self.body.acc = self.body.pos - danger.body.pos
+        elif len(preys) > 0 and len(symbs) > 0 and len(dangers) == 0:
+            if self.hunting:
+                self.run_to(preys[0].pos)
+                self.eat(preys[0])
             else:
-                self.body.acc = self.body.pos - danger.pos
+                self.run_to(symbs[0].pos)
 
         elif len(preys) > 0 and self.hunting:
             prey = preys[0]
+            self.body.acc = prey.pos - self.body.pos
+            self.eat(prey)
 
-            if isinstance(prey, Agent):
-                self.body.acc = prey.body.pos - self.body.pos
+        else:
+            self.body.acc = Vector2(uniform(-1, 1), uniform(-1, 1))
 
-                if self.body.pos.distance_to(prey.body.pos) < 5:
-                    core.memory("agents").remove(prey)
-                    self.body.hunger[0] -= 50
-                    if self.body.hunger[0] < 0:
-                        self.body.hunger[0] = 0
+
+
+
+    def run_to(self, pos):
+        self.body.acc = pos - self.body.pos
+
+    def run_from(self, predators):
+        self.body.acc = self.body.acc - self.fear(predators)
+
+    def fear(self, predators):
+        steering = Vector2()
+        predatorCounter = 0
+        for predator in predators:
+            if self.body.pos.distance_to(predator.pos) != 0:
+                diff = Vector2(predator.pos.x - self.body.pos.x, predator.pos.y - self.body.pos.y)
+                if diff.length() > 0.001:
+                    diff.scale_to_length(self.body.pos.distance_squared_to(predator.pos))
+                    predatorCounter += 1
+                    steering += diff
             else:
-                self.body.acc = prey.pos - self.body.pos
+                steering += Vector2(uniform(-5, 5), uniform(-5, 5))
+                predatorCounter += 1
 
+        if predatorCounter > 0:
+            steering /= predatorCounter
 
+            steering += self.body.speed
+
+            if steering.length() > self.body.maxAcc:
+                steering = steering.normalize()
+                steering.scale_to_length(self.body.maxAcc)
+        return steering
+
+    def eat(self, prey):
+        if self.body.pos.distance_to(prey.pos) < 5:
+            prey.is_eaten = True
+            self.update_hunger()
+
+    def update_hunger(self):
+        self.body.hunger[0] -= 5
+        if self.body.hunger[0] < 0:
+            self.body.hunger[0] = 0
 
     def show(self):
         self.body.show()
+        if self.hunting:
+            core.Draw.circle(self.body.color, self.body.pos, 15, 1)
 
     def filtrePerception(self):
         pass
+
+    def append_corner_as_danger(self, item, dangers):
+        if isinstance(item, Corner) and len(dangers) > 0:
+            dangers.append(item)
 
 
