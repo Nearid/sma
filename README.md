@@ -8,7 +8,7 @@ couleur :
 - Agent endormi : point noir
 - Agent mort : point blanc
 
-Le cercle autour des agents veulent dire qu'ils chassent. Ils chassent si leur jauge de faim est rempli à au moins 50%
+Un cercle autour d'un agent veut dire qu'il chasse. Il chasse si sa jauge de faim est rempli à au moins 50%
 
 Comportements :
 
