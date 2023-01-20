@@ -16,13 +16,15 @@ import matplotlib.pyplot as plt
 LENGTH = 1000
 HEIGHT = 600
 
+
 def update_chart():
     while True:
         x = [1, 2, 3, 4]
         preds, carns, herbs, decs = count_animals()
-        plt.bar(x, [preds, carns, herbs, decs], color= ['blue', 'red', 'green', 'brown'])
+        plt.bar(x, [preds, carns, herbs, decs], color=['blue', 'red', 'green', 'brown'])
         plt.xticks(x, ['predateurs', 'carnivores', 'herbivores', 'décomposeurs'])
         plt.pause(1)
+
 
 def count_animals():
     preds, carns, herbs, decs = 0, 0, 0, 0
@@ -39,6 +41,7 @@ def count_animals():
             decs += 1
     return preds, carns, herbs, decs
 
+
 def print_population_percentage():
     t = threading.Timer(2, print_population_percentage)
     t.daemon = True
@@ -49,7 +52,12 @@ def print_population_percentage():
     carns /= nb_animals / 100
     herbs /= nb_animals / 100
     decs /= nb_animals / 100
-    print('SuperPredator : ', preds, ' % | Carnivores : ', carns, ' % | Herbivores : ', herbs, ' % | Decomposeurs : ', decs, ' %')
+    print('SuperPredator : ', round(preds, 1), ' % '
+                                               '| Carnivores : ', round(carns, 1), ' % '
+                                                                                   '| Herbivores : ', round(herbs, 1),
+          ' % '
+          '| Decomposeurs : ', round(decs, 1), ' %')
+
 
 def build_agent(agent, params):
     agent.body.maxSpeed = uniform(params["maxSpeed"]["min"], params["maxAcc"]["max"])
@@ -60,6 +68,7 @@ def build_agent(agent, params):
     agent.body.hunger = [0, uniform(params["hunger"]["min"], params["hunger"]["max"])]
     agent.body.lifespan = uniform(params["lifespan"]["min"], params["lifespan"]["max"])
 
+
 def create_corners():
     corners = [Corner(), Corner(), Corner(), Corner()]
     corners[0].pos = Vector2(-5, -5)
@@ -67,6 +76,7 @@ def create_corners():
     corners[2].pos = Vector2(core.WINDOW_SIZE[0] + 5, core.WINDOW_SIZE[1] + 5)
     corners[3].pos = Vector2(-5, core.WINDOW_SIZE[1] + 5)
     core.memory("corners", corners)
+
 
 def load(filename="vivarium.json"):
     file = open(filename)
@@ -142,7 +152,6 @@ def handle():
             v = Vegetal()
             v.pos = Vector2(item.pos.x + uniform(-10, 10), item.pos.y + uniform(10, -10))
             core.memory("items").append(v)
-
 
 
 def setup():
