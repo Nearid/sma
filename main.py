@@ -4,7 +4,6 @@ from random import uniform
 
 from pygame import Vector2
 
-import agent
 import core
 from carnivoreagent import CarnivoreAgent
 from corner import Corner
@@ -12,13 +11,24 @@ from decomposeuragent import DecomposeurAgent
 from herbivoreagent import HerbivoreAgent
 from superpredatoragent import SuperpredatorAgent
 from vegetal import Vegetal
+import matplotlib.pyplot as plt
 
 LENGTH = 1000
 HEIGHT = 600
 
+def update_chart():
+    while True:
+        x = [1, 2, 3, 4]
+        preds, carns, herbs, decs = count_animals()
+        plt.bar(x, [preds, carns, herbs, decs], color= ['blue', 'red', 'green', 'brown'])
+        plt.xticks(x, ['predateurs', 'carnivores', 'herbivores', 'décomposeurs'])
+        plt.pause(1)
+
 def count_animals():
     preds, carns, herbs, decs = 0, 0, 0, 0
     for a in core.memory("agents"):
+        if a.body.dead:
+            continue
         if isinstance(a, SuperpredatorAgent):
             preds += 1
         elif isinstance(a, CarnivoreAgent):
@@ -30,7 +40,7 @@ def count_animals():
     return preds, carns, herbs, decs
 
 def print_population_percentage():
-    t = threading.Timer(1, print_population_percentage)
+    t = threading.Timer(2, print_population_percentage)
     t.daemon = True
     t.start()
     preds, carns, herbs, decs = count_animals()
@@ -141,7 +151,10 @@ def setup():
     core.WINDOW_SIZE = [LENGTH, HEIGHT]
     load()
     print_population_percentage()
-    # plot_population()
+    thread = threading.Thread(target=update_chart)
+    thread.daemon = True
+    thread.start()
+    plt.show()
 
     print("Setup END-----------")
 
