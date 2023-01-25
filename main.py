@@ -123,7 +123,7 @@ def load(filename="vivarium.json"):
 
 def handle():
     for agent in core.memory("agents"):
-        if agent.body.dead and agent.body.deadTime > core.fps * 10:
+        if agent.body.dead and agent.body.deadTime > core.fps * 50:
             core.memory("agents").remove(agent)
         if agent.body.is_reproductible():
             agent.body.reprod[0] = 0

@@ -29,7 +29,7 @@
     }
   },
   "carnivore": {
-    "nb": 5,
+    "nb": 12,
     "params": {
       "lifespan": {
         "max": 480,
@@ -87,7 +87,7 @@
     }
   },
   "herbivore": {
-    "nb": 7,
+    "nb": 5,
     "params": {
       "lifespan": {
         "max": 300,
