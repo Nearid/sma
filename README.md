@@ -28,3 +28,5 @@ Si dans ma perception j'ai :
 
 
 *ami = agent symbiotique*
+
+Les animaux morts disparaissent au bout de 50 secondes. Les vegetaux peuvent se dupliquer (probabilité très faible de se dupliquer calculée à chaque frame)
